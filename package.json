@@ -1,0 +1,19 @@
+{
+  "name": "rpi-course-scheduler-firebase-functions",
+  "version": "1.0.0",
+  "description": "Firebase functions for course scheduler Flutter app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelobe/RPI-Course-Scheduler-Firebase-Functions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuelobe/RPI-Course-Scheduler-Firebase-Functions/issues"
+  },
+  "homepage": "https://github.com/samuelobe/RPI-Course-Scheduler-Firebase-Functions#readme"
+}
