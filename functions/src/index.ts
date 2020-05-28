@@ -1,8 +1,17 @@
 import * as functions from 'firebase-functions';
+import * as rp from 'request-promise';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-export const helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
- });
+const url = 'https://sis.rpi.edu/reg/zs20200501.htm';
+
+export const getHTML = functions.https.onRequest((request, response) => {
+    rp(url)
+        .then(function (html) {
+            //success!
+            response.send(html);
+            console.log(html);
+        })
+        .catch(function (err) {
+            //handle error
+        });
+
+});
