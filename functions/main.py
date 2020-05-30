@@ -3,17 +3,18 @@ import time
 import csv
 import json
 import sys
+from flask import jsonify
 from collections import OrderedDict
 
-def main():
+
+def test(request):
     start_time = time.time()
 
-    open('data.csv', 'w')
-    csvfile = open('data.csv', 'r')
-    jsonfile = open('test.json', 'w')
+    open('/tmp/data.csv', 'w')
+    csvfile = open('/tmp/data.csv', 'r')
 
     # The webpage URL whose table we want to extract
-    url = sys.argv[1]
+    url = 'https://sis.rpi.edu/reg/zs20200501.htm'
 
     # Assign the table data to a Pandas dataframe
     table = pd.read_html(url)
@@ -28,7 +29,7 @@ def main():
             list(table[i].filter(regex='Unnamed: 12_level_1')))]
 
     df = pd.concat(table, ignore_index=True)
-    df.to_csv("data.csv", index=False)
+    df.to_csv("/tmp/data.csv", index=False)
 
     time.sleep(1)
 
@@ -47,12 +48,11 @@ def main():
             courses['courses'].append(sorted_row)
         i += 1
 
-    json.dump(courses, jsonfile)
-
+    r = json.dumps(courses)
     end_time = time.time()
+    return r, 200, {'Content-Type': 'application/json'}
 
-    print('Execution time ' + str(end_time-start_time))
-
-
+"""
 if __name__ == "__main__":
-    main()
+    test()
+"""
