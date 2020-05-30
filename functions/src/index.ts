@@ -2,7 +2,7 @@
 import * as axios from "axios";
 import * as cheerio from "cheerio";
 import { Course } from "./course";
-import { writeFileSync } from "fs";
+//import { writeFileSync } from "fs";
 
 const url = "https://sis.rpi.edu/reg/zs202009.htm";
 
@@ -54,7 +54,7 @@ axios.default
     items.forEach(element => {
       logString += element + "\n";
     });
-    writeFileSync("./filename.txt", logString);
+    //writeFileSync("./filename.txt", logString);
     //console.log(logString);
   })
   .catch(() => console.log("poop"));
