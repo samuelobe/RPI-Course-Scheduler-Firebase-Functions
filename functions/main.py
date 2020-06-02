@@ -11,6 +11,16 @@ from collections import defaultdict
 
 
 def test(request):
+
+    project_id = 'course-scheduler-e52d1'
+    # Use the application default credentials
+    cred = credentials.ApplicationDefault()
+    firebase_admin.initialize_app(cred, {
+        'projectId': project_id,
+    })
+
+    db = firestore.client()
+
     start_time = time.time()
 
     f = open('api_key.json',) 
@@ -35,16 +45,17 @@ def test(request):
     url = 'https://sis.rpi.edu/reg/zs20200501.htm'
 
     # Assign the table data to a Pandas dataframe
-    table = pd.read_html(url)
+    tables = pd.read_html(url)
 
-    for i in range(len(table)):
+    for i in range(len(tables)):
         # Remove unneeded strings and replace them with blank strings
-        table[i].rename({"Unnamed: 1_level_0": "", "Unnamed: 2_level_0": "", "Unnamed: 8_level_0": "",
-                         "Unnamed: 10_level_0": ""}, axis="columns", inplace=True)
+        tables[i].rename({"Unnamed: 1_level_0": "", "Unnamed: 2_level_0": "", "Unnamed: 8_level_0": "",
+                          "Unnamed: 10_level_0": ""}, axis="columns", inplace=True)
 
         # Remove column that contains unneeded data
-        table[i] = table[i][table[i].columns.drop(
-            list(table[i].filter(regex='Unnamed: 12_level_1')))]
+        tables[i] = tables[i][tables[i].columns.drop(
+            list(tables[i].filter(regex='Unnamed: 12_level_1')))]
+        # print(tables[i])
 
     # Convert table data to csv formart and add it to temp file
     df = pd.concat(table, ignore_index=True)
