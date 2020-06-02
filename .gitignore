@@ -1,3 +1,4 @@
 .vscode
 functions/api_key.json
 functions/data.json
+.vscode/settings.json
